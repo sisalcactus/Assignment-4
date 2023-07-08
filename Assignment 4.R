@@ -10,11 +10,15 @@ ufo_df <- read.csv("ufo_subset.csv")                                            
 
 # Finding the rows lacking "shape" information
 rows_missing_shape <- which(ufo_df$shape == "")                                 # this is needed to identify the specific row numbers (for rows containing empty cells in the "shape" column) 
-rows_missing_shape                                                              # this is needed to display all row numbers where Shape is not described
+rows_missing_shape                                                              # this is needed to display all row numbers where "shape" values are absent
 
 # Cleaning the data
 ufo_df_clean <- ufo_df %>%
   mutate(shape = case_when(shape == "" ~ "unknown", .default = shape)) %>%      # this is needed to replace empty "shape" cells with "unknown" while keeping the rest unchanged
   filter(country != "") %>%                                                     # this is needed to filter out (remove) all rows with empty cells in the "country" column
-  
-  
+  mutate(date_posted = as.Date(date_posted, tryFormats = "%d-%m-%Y")) %>%
+  mutate(datetime = as.Date(datetime)) %>%
+  rename(date_observed = datetime) %>%
+  mutate(report_delay = date_posted - date_observed)
+
+
