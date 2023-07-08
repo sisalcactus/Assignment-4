@@ -16,9 +16,10 @@ rows_missing_shape                                                              
 ufo_df_clean <- ufo_df %>%
   mutate(shape = case_when(shape == "" ~ "unknown", .default = shape)) %>%      # this is needed to replace empty "shape" cells with "unknown" while keeping the rest unchanged
   filter(country != "") %>%                                                     # this is needed to filter out (remove) all rows with empty cells in the "country" column
-  mutate(date_posted = as.Date(date_posted, tryFormats = "%d-%m-%Y")) %>%
-  mutate(datetime = as.Date(datetime)) %>%
-  rename(date_observed = datetime) %>%
-  mutate(report_delay = date_posted - date_observed)
+  mutate(date_posted = as.Date(date_posted, tryFormats = "%d-%m-%Y")) %>%       # this is needed to set the date_posted column values in the proper format (date format), with the tryFormats part added to specify the current format
+  mutate(datetime = as.Date(datetime)) %>%                                      # this is needed to set the datetime column values also in the proper format (tryFormats not needed as the dates are recognized by default)
+  rename(date_observed = datetime) %>%                                          # this is needed to update the datetime column (now just dates)
+  mutate(report_delay = date_posted - date_observed) %>%                        # this is needed to add a new column (report_delay) capturing the difference between the posted date and the sighting date
+  filter(report_delay >= 0)                                                     # this is needed to filter out the rows where the posted date precedes the sighting date (meaning the difference would be a negative value)
 
 
