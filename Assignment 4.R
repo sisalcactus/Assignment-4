@@ -35,7 +35,7 @@ View(ufo_df_clean)                                                              
 # Creating the table to show the percentage of hoaxes per country ####
 total_hoax_count <- sum(ufo_df_clean$is_hoax == "TRUE")                                       # this is needed to find the total number of sightings classified as "hoax" for downstream calculation (as the denominator)
 hoaxes_per_country_table <- ufo_df_clean %>%                                                  # this is needed to create the table of interest with "country" being the category of interest (since we want to find the numnber of hoaxes for each country)
-  group_by(country) %>%                                                                       # this and the next line of code are needed to create a table showing the percentages of interest (rounded to 2 decimal places), with sum() used to count the number of hoax sightings for each country
+  group_by(toupper(country)) %>%                                                              # toupper() used to make the country upper case since that should be the convention; this and the next line of code are needed to create a table showing the percentages of interest (rounded to 2 decimal places), with sum() used to count the number of hoax sightings for each country
   summarise(percentage_of_hoaxes = round(sum(is_hoax == "TRUE") / total_hoax_count * 100, 2))
 View(hoaxes_per_country_table)                                                  # this is to visualize the table
 
