@@ -40,7 +40,7 @@ hoaxes_per_country_table <- ufo_df_clean %>%                                    
   summarise(percentage_of_hoaxes = round(sum(is_hoax == "TRUE") / total_hoax_count * 100, 2))
 View(hoaxes_per_country_table)                                                  # this is to visualize the table
 
-# Continuing onto adding report_delay ####
+# Continuing onto adding report_delay and onward ####
 ufo_df_clean2 <- ufo_df_clean %>%
   mutate(report_delay = date_posted - date_observed) %>%                        # this is needed to add a new column (report_delay) capturing the difference, in days, between the posted date and the observation date
   filter(report_delay >= 0)                                                     # this is needed to filter out (remove) the rows where the posted date precedes the sighting date (meaning the difference would be a negative value, which would not make sense)
