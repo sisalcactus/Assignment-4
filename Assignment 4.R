@@ -67,3 +67,18 @@ str(ufo_df_clean2$duration.seconds)                                   # check fo
     # hist() is the function to plot the histogram (overall presenting a nice bell curve!); I edited the title (using "main") and x axis label (using "xlab") but not the y axis label since the default is what I want
     # for better visualization, I added some colour!
 
+
+
+## General Comments
+# The code meets the specified assignment requirements and it behaves as expected 
+# The code is easy to understand. There are no unnecessary comments, and the code is self explanatory. 
+# I like how you also outlined what packages the user would need to install to run this code.
+# There are no redundant operations. Great use of piping to avoid creating more data set versions than necessary!
+
+## Suggestions
+# I would consider shortening the vector names (ie. line 50). One example is delay_per_country or country_delay. 
+
+## Summary
+# Overall the code looks good and functions as expected. 
+# There are no significant concerns to address. 
+# The commit history is shown in github so one can follow along with code development. 
